@@ -1,16 +1,22 @@
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-public class NumbersActivity extends AppCompatActivity {
+public class NumbersActivity extends Fragment {
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_numbers,container,false);
 
         String[] angka = new String[10];
         angka[0] = "one";
@@ -23,9 +29,9 @@ public class NumbersActivity extends AppCompatActivity {
         angka[7] = "Eight";
         angka[8] = "Nine";
         angka[9] = "Ten";
-
-
-
+        return view;
     }
+
+
 
 }

@@ -17,65 +17,82 @@ package com.example.android.miwok;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView numbers,family,colors,phrases;
+    private SectionsPageAdapter mSectionsPageAdapter;
+
+    private ViewPager mViewPager;
+
+    TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_main);
-        numbers = (TextView)findViewById(R.id.numbers);
-        family = (TextView)findViewById(R.id.family);
-        colors = (TextView)findViewById(R.id.colors);
-        phrases = (TextView)findViewById(R.id.phrases);
+        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        setupViewPager(mViewPager);
 
-        numbers.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers View is clicked on.
-            @Override
-            public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
 
-        family.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers View is clicked on.
-            @Override
-            public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, FamilyActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
-
-        colors.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers View is clicked on.
-            @Override
-            public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, ColorsActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
-
-        phrases.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers View is clicked on.
-            @Override
-            public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, phrasesActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
-
-
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ColorsActivity(), "Colors");
+        adapter.addFragment(new NumbersActivity(), "Numbers");
+        adapter.addFragment(new phrasesActivity(), "Phrases");
+        adapter.addFragment(new FamilyActivity(), "Family");
+        viewPager.setAdapter(adapter);
     }
 
 }
+
+
+
+//  numbers.setOnClickListener(new View.OnClickListener() {
+//// The code in this method will be executed when the numbers View is clicked on.
+//@Override
+//public void onClick(View view) {
+//        Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
+//        startActivity(numbersIntent);
+//        }
+//        });
+//
+//        family.setOnClickListener(new View.OnClickListener() {
+//// The code in this method will be executed when the numbers View is clicked on.
+//@Override
+//public void onClick(View view) {
+//        Intent numbersIntent = new Intent(MainActivity.this, FamilyActivity.class);
+//        startActivity(numbersIntent);
+//        }
+//        });
+//
+//        colors.setOnClickListener(new View.OnClickListener() {
+//// The code in this method will be executed when the numbers View is clicked on.
+//@Override
+//public void onClick(View view) {
+//        Intent numbersIntent = new Intent(MainActivity.this, ColorsActivity.class);
+//        startActivity(numbersIntent);
+//        }
+//        });
+//
+//        phrases.setOnClickListener(new View.OnClickListener() {
+//// The code in this method will be executed when the numbers View is clicked on.
+//@Override
+//public void onClick(View view) {
+//        Intent numbersIntent = new Intent(MainActivity.this, phrasesActivity.class);
+//        startActivity(numbersIntent);
+//        }
+//        });
 //
 //    public void goToNumber(View view){
 //        Intent i = new Intent(this,NumbersActivity.class);
